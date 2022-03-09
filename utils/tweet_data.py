@@ -9,7 +9,7 @@ search_url = "https://api.twitter.com/2/tweets/search/recent"
 
 query_params = {
     'query': '#green_hydrogen OR green hydrogen',
-    'max_results':10,
+    'max_results':100,
     # 'start_time':"2022-02-01T00:00:00.000Z",
     'expansions':'author_id',
     'tweet.fields': 'created_at',
@@ -27,7 +27,7 @@ def connect_to_endpoint(url, params):
     return response.json()
 
 
-def tweets(count=100):
+def tweets(count=200):
     params = query_params
     json_response = connect_to_endpoint(search_url, params)
     json_data = {
