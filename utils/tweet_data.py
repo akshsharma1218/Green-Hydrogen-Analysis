@@ -39,13 +39,16 @@ def tweets(count=200):
         json_response = connect_to_endpoint(search_url, params)
         json_data['data'] += json_response['data']
         json_data['user'] += json_response['includes']['users']
+        print(len(json_data['data']))
         if(count <= len(json_data['data'])):
             break
 
     df1 = pd.DataFrame.from_records(json_data['data'], columns=['created_at','text','author_id'])
     df2 = pd.DataFrame.from_records(json_data['user'],columns=['id','username'])
-    df = pd.merge(df1,df2,left_on="author_id",right_on="id",suffixes=[None,None])
+    df2.rename(columns={'id':'author_id'},inplace=True)
+    df = pd.merge(df1,df2,how='left',on="author_id")
     df.rename(columns={'created_at':'date','text':'data','username':'source'},inplace=True)
+    df = df.drop_duplicates(subset=['data'])
     df['date'] = df['date'].apply(lambda x:x[:-5].replace('T'," "))
     return df[['date','data','source']]
 
