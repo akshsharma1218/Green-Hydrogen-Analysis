@@ -44,13 +44,12 @@ def tweets(count=200):
             break
 
     df1 = pd.DataFrame.from_records(json_data['data'], columns=['created_at','text','author_id'])
-    df2 = pd.DataFrame.from_records(json_data['user'],columns=['id','username'])
-    df2.rename(columns={'id':'author_id'},inplace=True)
-    df = pd.merge(df1,df2,how='left',on="author_id")
-    df.rename(columns={'created_at':'date','text':'data','username':'source'},inplace=True)
-    df = df.drop_duplicates(subset=['data'])
-    df['date'] = df['date'].apply(lambda x:x[:-5].replace('T'," "))
-    return df[['date','data','source']]
+    df2 = pd.DataFrame.from_records(json_data['user'], columns=['id','username'])
+    mapping = dict(df2[['id', 'username']].values)
+    df1['username'] = df1.author_id.map(mapping)
+    df1.rename(columns={'created_at':'date','text':'data','username':'source'},inplace=True)
+    df1['date'] = df1['date'].apply(lambda x:x[:-5].replace('T'," "))
+    return df1[['date','data','source']]
 
 
 if __name__ == "__main__":
