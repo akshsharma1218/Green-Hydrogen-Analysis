@@ -12,11 +12,11 @@ Run following commands:
 ```
 
 # About Project
-- Go to [http://127.0.0.1:8000/docs](docs) route to see all available route and schema. 
-- Go to [http://127.0.0.1:8000/news_data](news_data) route to analyse only google news data.
-- Go to [http://127.0.0.1:8000/tweet_data](tweet_data) route to analyse only twitter data.
-- Go to [http://127.0.0.1:8000/home](all_data) route to analyse data from both google news and twitter.
-- Go to [http://127.0.0.1:8000/](download_csv) route to download all data as csv. 
+- Go to [docs](http://127.0.0.1:8000/docs) route to see all available route and schema. 
+- Go to [news_data](http://127.0.0.1:8000/news_data) route to analyse only google news data.
+- Go to [tweet_data](http://127.0.0.1:8000/tweet_data) route to analyse only twitter data.
+- Go to [all_data](http://127.0.0.1:8000/home) route to analyse data from both google news and twitter.
+- Go to [download_csv](http://127.0.0.1:8000/) route to download all data as csv. 
 - One can also add `min_count` query parameter in `home, download_csv and tweet_data` route to reduce the amount of tweets to be scraped.  
 
 # Images
